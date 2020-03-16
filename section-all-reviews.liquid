@@ -1,0 +1,525 @@
+<div class="reviews-template" data-section-id="{{section.id}}" data-section-type="{{section.id}}">
+  <img class="collection_template--illustration-right2 rev" src="{{ 'right-bg.png' | asset_url }}">
+  <img class="collection_template--illustration-left rev" src="{{ 'left-bg.png' | asset_url }}">
+  <div class="reviews-header">
+    <div class="page-width">
+    <div class="grid text-center">
+      <div class="grid__item grid__item medium-up--one-whole banner-text">
+        <p class="span-title">{{ section.settings.Banner_hnd }}</p>
+        <h2 class="bold h4 no-before" id="apItem6">{{ section.settings.Banner_para }}</h2>
+      </div>{%comment%}
+      <div class="grid__item grid__item medium-up--one-half banner-text">
+        <p class="span-title">{{ section.settings.Banner_hnd }}</p>
+        <h2 class="bold h4 no-before" id="apItem6">{{ section.settings.Banner_para }}</h2>
+      </div>
+      <div class="grid__item grid__item medium-up--one-half banner-img">
+        <img src="{{ section.settings.main_img | img_url: 'large' }}" class="lazyautosizes lazyloaded">
+      </div>{%endcomment%}
+    </div>
+    </div>
+  </div>
+  <div class="reviews-grid">
+    <div class="page-width">
+    <div class="card-list grid" data-desktop-columns="3" data-mobile-columns="3" data-grid-style="collage">
+      <div class="margin-heading">
+      	<h2 class="h3 bold margin" style="margin-bottom:0;">{{ section.settings.head }}</h2>
+      </div>
+      <div class="recipe__cards">
+        {% for block in section.blocks %}
+        <div class="card__wrapper card__wrapper--recipe-module review">
+          <div class="card__wrapper--round-image">
+          	<img class="round-img" src="{{ block.settings.round_img | img_url: 'small' }}">
+          </div>
+          <div class="card__inner">
+            <div class="card__wrapper--card_para">
+              <p class="card_para">{{ block.settings.card_para }}</p>
+            </div>
+            <div class="card__wrapper--card_details">
+              <h4>{{ block.settings.card_name }}</h4>
+              <p>{{ block.settings.card_desc }}</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      
+      <div class="h4 quote rte-setting margin-heading">
+        <h2 class="h3 bold margin" >{{ section.settings.head_2 }}</h2>
+        <p class="margin width">{{ section.settings.para_2 }}</p>
+      </div>{%comment%}
+      <div class="page-width all-reviews two one">
+        <div class="one-third one">
+          <p class="head-number">{{ section.settings.number_ }}</p>
+          <img class="star" src="{{ 'stars-o.png' | asset_url }}">
+          <p class="head-para">{{ section.settings.para_ }}</p>
+        </div>
+        <div class="two-third one">
+        	<img class="rev-image" src="{{ section.settings.rev-image | img_url: 'large' }}">
+        </div>
+      </div>{%endcomment%}
+      
+      <div class="all-reviews">
+        {% assign product = all_products[section.settings.select_product] %}
+        <div class="text-center margin">
+          <a href="{{ section.settings.btn_url }}" class="btn btn--secondary"><span>{{ section.settings.btn_text }}</span></a>
+        </div>
+        <p class="h6 text-center" style="margin-bottom: 3rem"></p>
+        <div id="shopify-product-reviews">
+          <div class="spr-container">
+            <div class="spr-header">
+              <h2 class="spr-header-title">Customer Reviews</h2>
+              <div class="spr-summary">
+                <span class="spr-starrating spr-summary-starrating">
+                  <i class="spr-icon spr-icon-star"></i>
+                  <i class="spr-icon spr-icon-star"></i>
+                  <i class="spr-icon spr-icon-star"></i>
+                  <i class="spr-icon spr-icon-star"></i>
+                  <i class="spr-icon spr-icon-star"></i>
+                </span>
+                <span class="spr-summary-actions"></span>
+              </div>
+            </div>
+            <div class="spr-content">
+              <div class="spr-reviews" id="allreviews"></div>
+            </div>
+          </div>
+        </div>{%comment%}
+        <center style="margin-top: 3rem; margin-bottom: 3rem;">
+          <span id="showall" class="btn btn--secondary"><span>View all reviews</span></span>
+        </center>{%endcomment%}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.spr-icon {
+      color: #ff6d38;
+}
+a.spr-icon:hover {
+      color: #662c16;
+}
+.spr-container {
+    padding: 24px;
+    border-color: #ECECEC;
+}
+.spr-review, .spr-form {
+    border-color: #ECECEC;
+}
+.reviews-header {
+    background: #fff8ef;
+}
+.reviews-grid {
+    background: #fff;
+}
+p.width {
+    width: 80%;
+}
+.no-before {
+    font-size: 35px;
+	text-align: center;
+    /*display: flex;
+    justify-content: space-between;*/
+    position: initial;
+}
+.banner-text {
+	margin-top: 130px;
+    margin-bottom: 80px;
+}
+.banner-img {
+    margin-top: 105px;
+    margin-bottom: 97px;
+
+}
+#shopify-section-custom-3col-block img.left-img {
+    height: 77vh;
+    position: absolute;
+    z-index: 14;
+    top: -111px;
+    left: 0;
+}
+#shopify-section-custom-3col-block img.right-img {
+    height: 77vh;
+    position: absolute;
+    z-index: 10;
+    top: -124px;
+    right: 0;
+}
+.margin-heading {
+    margin-bottom: 40px;
+}  
+h2.bold.margin {
+  	font-size: 25px;
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 87px;
+    padding-bottom: 32px;
+}
+p.margin {
+    font-weight: 100;
+    font-size: 15px;
+    text-align: center;
+    margin: 0 auto;
+}
+.card__wrapper.card__wrapper--recipe-module.review {
+    background-color: rgba(255, 255, 255, 0.75);
+    border: 1px solid #ff6b38;
+    border-left: 1px solid #ff6b38;
+    border-bottom: 1px solid #ff6b38;
+}
+p.width {
+    line-height: 2em;
+}
+.one-third.one {
+    border: 1px solid #ede8e8;
+}
+.card__wrapper--round-image img {
+    border-radius: 50%;
+    height: 96px;
+    width: 96px;
+    margin: 0 auto;
+    display: table;
+    margin-top: 32px;
+}
+.card__wrapper--card_para {
+    word-wrap: break-word;
+    width: 100%;
+    text-align: left;
+    min-height: 200px;
+    font-size: 15px;
+}
+.card__wrapper--card_details {
+    width: 100%;
+    text-align: left;
+    margin-top: 30px;
+}
+.card__wrapper--card_details h4 {
+    font-size: 21px;
+    margin-bottom: 4px;
+}
+.card__wrapper--card_details p {
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: #9c9696;
+}
+.recipe__cards .card__inner {
+    padding: 3rem;
+}
+.two {
+    padding-top: 28px;
+    display: flex;
+    margin-bottom: 64px;
+}
+.two-third {
+    width: 65%;
+}
+img.star {
+    display: block;
+    margin: 0 auto;
+    height: 20px;
+}
+p.head-number {
+    color: #ff6d38;
+    font-size: 4rem;
+    font-weight: bold;
+    margin: 20px auto 0;
+    text-align: center;
+}
+p.head-para{
+    padding-bottom: 22px;
+    padding-top: 22px;
+    margin: 0 auto;
+    text-align: center;
+}
+.two-third {
+    margin: 0 auto;
+    width: 65%;
+    display: table;
+}
+img.rev-image {
+    padding-top: 9px;
+    margin: 0 auto;
+    display: table;
+}
+span.span-title {
+    color: #ffb393;
+}
+p.span-title {
+    font-size: 16px;
+    text-align: center;
+    color: #ff6a38;
+    font-weight: 500;
+    letter-spacing: 2px;
+}
+.card-list {
+    margin: 0 auto;
+}
+.margin a {
+    margin-bottom: 64px;
+    margin-top: 33px;
+}
+img.collection_template--illustration-left.rev {
+    width: 203px;
+    position: absolute;
+    left: 0px;
+    z-index: 0;
+    top: 55%;
+    bottom: 32%;
+    opacity: 1;
+}
+img.collection_template--illustration-right2.rev {
+    width: 203px;
+    position: absolute;
+    right: 0;
+    z-index: 0;
+    top: 45%;
+    opacity: 1;
+}
+.recipe__cards{
+    justify-content: space-between !important;
+  }
+h2.no-before {
+    line-height: 45px;
+}
+@media screen and (max-width: 425px){
+  .banner-text {
+    margin-top: 80px;
+  	margin-bottom: 30px;
+}
+.banner-img {
+    margin-top: 0px;
+  	margin-bottom: 40px;
+}
+.page-width.all-reviews.one {
+    width: 100%;
+    display: table;
+}
+.one-third.one {
+    width: auto;
+}
+
+.two-third.one {
+    width: auto;
+    margin-top: 24px;
+}  
+  }
+</style>
+
+{% schema %}
+  {
+    "name": "Reviews Template",
+    "settings": [
+		{
+			"type": "image_picker",
+			 "id" : "main_img",
+			 "label": "Main Image"
+		},
+		{
+			"type": "text",
+			 "id" : "Banner_hnd",
+			 "label": "Top Banner Heading"
+		},
+		{
+			"type": "textarea",
+			 "id" : "Banner_para",
+			 "label": "Top Banner About"
+		},
+		{
+			"type": "text",
+			 "id" : "head",
+			 "label": "Heading"
+		},
+		{
+			"type": "text",
+			 "id" : "head_2",
+			 "label": "Second Heading"
+		},
+		{
+			"type": "textarea",
+			 "id" : "para_2",
+			 "label": "Second Paragraph"
+		},
+		{
+			"type": "text",
+			 "id" : "number_",
+			 "label": "Review Rate"
+		},
+		{
+			"type": "text",
+			 "id" : "para_",
+			 "label": "Review Content"
+		},
+		{
+			"type": "url",
+			 "id" : "btn_url",
+			 "label": "Button Link"
+		},
+		{
+			"type": "text",
+			 "id" : "btn_text",
+			 "label": "Button Text"
+		},
+		{
+          "type": "product",
+		  "id" : "select_product",
+		  "label": "Select Product"
+		},
+		{
+			"type": "image_picker",
+			 "id" : "rev-image",
+			 "label": "Review Image"
+		}
+
+	],
+  "blocks": [
+    {
+      "type": "text",
+	  "name": "Cards",
+	  "settings": [
+		{
+			"type": "image_picker",
+			 "id" : "round_img",
+			 "label": "Image"
+		},
+		{
+			"type": "textarea",
+			 "id" : "card_para",
+			 "label": "Review"
+		},
+		{
+			"type": "text",
+			 "id" : "card_name",
+			 "label": "Author"
+		},
+		{
+			"type": "text",
+			 "id" : "card_desc",
+			 "label": "Designation"
+		}
+		
+	]
+	}
+]
+ }
+{% endschema %}
+  
+{%- assign collectionHandle = 'all' -%}
+
+<script>
+
+(function(){
+
+  window.reviewApp = window.reviewApp || {
+    debug:false,
+    reviews:[],
+    reviewUrl:'https://productreviews.shopifycdn.com/proxy/v4/reviews/',
+    reviewStore:{{ shop.permanent_domain | json }},
+  };
+
+  window.reviewApp.translations = {
+    'missing_id':'Product ID array not defined',
+    'script_exists':'The script has already been loaded on the page'
+  };
+
+  window.reviewApp.productIdList = [
+    {%- for reviewProduct in collections[collectionHandle].products limit:250 -%}
+      {{- reviewProduct.id -}}
+      {%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ];
+  
+  reviewApp.errLog = function(t){
+    if(!reviewApp.debug){ return }
+    console.warn(reviewApp.translations[t])
+  };
+
+  var getBadges = function(a){
+
+    if(typeof a === 'undefined'){ errLog('missing_id');return }
+    if(!!document.getElementById('reviewBadges')){ errLog('script_exists');return }
+
+    window.badgesLoaded = function(a){
+      console.log(a);
+    };
+
+    var idString = [];
+    for (var i = a.length - 1; i >= 0; i--) {
+      idString.push('&product_ids[]='+a[i]);
+    };
+
+    var script = document.createElement("script");
+    script.id = "reviewBadges";
+    script.async = true;
+    script.src = [window.reviewApp.reviewUrl,'badges?callback=badgesLoaded&shop=',window.reviewApp.reviewStore,idString.join('')].join('');
+    document.body.appendChild(script);
+
+  };
+
+  window.reviewLoaded = function(a){
+
+    window.reviewApp.reviews.push(a);
+    if(window.reviewApp.productIdList.length){ 
+      reviewApp.getReviews(window.reviewApp.productIdList);
+      return;
+    };
+    
+    for (var i = window.reviewApp.reviews.length - 1; i >= 0; i--) {
+
+      var tmpDiv = document.createElement('div');
+      tmpDiv.innerHTML = window.reviewApp.reviews[i].reviews;
+      var reviewText = tmpDiv.querySelectorAll('.spr-review-content');
+      var reviewer = tmpDiv.querySelectorAll('.spr-review-header-byline');
+      var title = tmpDiv.querySelectorAll('.spr-review-header-title');
+      var rating = tmpDiv.querySelectorAll('.spr-starratings');
+      //console.log(window.reviewApp.reviews[i].reviews,reviewText.length);
+
+      for (var _i = reviewText.length - 1; _i >= 0; _i--) {
+        var divHtml = '';
+        divHtml+= [
+        '<div class="spr-review" data-rating="'+rating[_i].getAttribute('aria-label').replace(" of 5 stars", "")+'"><div class="spr-review-header"><span class="spr-starratings spr-review-header-starratings" aria-label="5 of 5 stars" role="img">',
+        rating[_i].innerHTML,
+        '</span><h3 class="spr-review-header-title">',
+        title[_i].innerText,
+        '</h3><span class="spr-review-header-byline"><strong>',
+        reviewer[_i].getElementsByTagName('strong')[0].innerText,
+        '</strong></span></div><div class="spr-review-content"><p class="spr-review-content-body">',
+        reviewText[_i].innerText,
+        '</p></div></div>'
+        ].join('');
+        document.getElementById('allreviews').insertAdjacentHTML('beforeend',divHtml);
+      };
+
+    };
+
+  };
+
+  window.reviewApp.getReviews = function(a){
+
+    if(typeof a === 'undefined'){ errLog('missing_id');return }
+    var productId = a.shift();
+    var script = document.createElement("script");
+
+    if(document.getElementById('singleReviewData')){
+      document.getElementById('singleReviewData').remove(); /* cleanup (optional) */
+    }
+    
+    script.id = 'singleReviewData';
+    script.async = true;
+    script.src = [window.reviewApp.reviewUrl,'product?callback=reviewLoaded&shop=',window.reviewApp.reviewStore,'&product_id=',productId].join('');
+    document.body.appendChild(script);
+
+  };
+
+  reviewApp.getReviews(window.reviewApp.productIdList);
+  var showAll = function(a){
+    //var $allreviews = document.getElementById('allreviews');
+    //$allreviews.find('.spr-review').sort(function(a, b) {
+    //  return +a.getAttribute('data-rating') - +b.getAttribute('data-rating');
+    //}).appendTo($allreviews);
+    //document.querySelectorAll('.spr-review')[0].style.display = 'none';
+    //document.querySelectorAll('.spr-review').slice(5, 10).style.display = 'block';
+  };
+  document.getElementById('showall').addEventListener('click', showAll);
+
+})();
+</script>
