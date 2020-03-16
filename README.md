@@ -1,0 +1,1 @@
+# all-reviews-page-on-shopify-by-default-reviews-app
