@@ -476,7 +476,7 @@ h2.no-before {
       for (var _i = reviewText.length - 1; _i >= 0; _i--) {
         var divHtml = '';
         divHtml+= [
-        '<div class="spr-review" data-rating="'+rating[_i].getAttribute('aria-label').replace(" of 5 stars", "")+'"><div class="spr-review-header"><span class="spr-starratings spr-review-header-starratings" aria-label="5 of 5 stars" role="img">',
+        '<div class="spr-review" data-date="'+reviewer[_i].getElementsByTagName('strong')[1].innerText+'" data-rating="'+rating[_i].getAttribute('aria-label').replace(" of 5 stars", "")+'"><div class="spr-review-header"><span class="spr-starratings spr-review-header-starratings" aria-label="5 of 5 stars" role="img">',
         rating[_i].innerHTML,
         '</span><h3 class="spr-review-header-title">',
         title[_i].innerText,
@@ -511,15 +511,18 @@ h2.no-before {
   };
 
   reviewApp.getReviews(window.reviewApp.productIdList);
-  var showAll = function(a){
-    //var $allreviews = document.getElementById('allreviews');
-    //$allreviews.find('.spr-review').sort(function(a, b) {
-    //  return +a.getAttribute('data-rating') - +b.getAttribute('data-rating');
-    //}).appendTo($allreviews);
+  setTimeout(function(){
+    var $allreviews = document.getElementById('allreviews');
+    $(".spr-review").sort(function(a,b){
+      return new Date($(a).attr("data-date")) > new Date($(b).attr("data-date"));
+    }).each(function(){
+      $allreviews.prepend(this);
+    });
+  }, 5000);
+  //var showAll = function(a){
     //document.querySelectorAll('.spr-review')[0].style.display = 'none';
     //document.querySelectorAll('.spr-review').slice(5, 10).style.display = 'block';
-  };
-  document.getElementById('showall').addEventListener('click', showAll);
-
+  //};
+  //document.getElementById('showall').addEventListener('click', showAll);
 })();
 </script>
